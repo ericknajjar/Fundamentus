@@ -46,5 +46,7 @@ allRows = table.find_all('tr')
 for content in allRows:
     ticker = content.span.text
     roic_text = content.find_all("td")[14].text
+    net_worth_text = content.find_all("td")[17].text
     roic = p2f(roic_text) 
-    scraperwiki.sqlite.save(unique_keys=['ticker'], data={"ticker": ticker, "roic": roic})
+    net_worth = p2f(net_worth_text)
+    scraperwiki.sqlite.save(unique_keys=['ticker'], data={"ticker": ticker, "roic": roic,"net_worth":net_worth})
