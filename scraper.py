@@ -23,6 +23,9 @@
 # called "data.sqlite" in the current working directory which has at least a table
 # called "data".
 
+from bs4 import BeautifulSoup
+import scraperwiki
+
 def p2f(x):
     striped = x.strip('%')
     splited = striped.split(',')
@@ -32,8 +35,6 @@ def p2f(x):
     return float(integer+'.'+decimal)/100
   
 
-from bs4 import BeautifulSoup
-#import scraperwiki
 
 url = 'https://www.fundamentus.com.br/resultado.php'
 html = scraperwiki.scrape(url)
