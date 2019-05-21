@@ -22,3 +22,28 @@
 # All that matters is that your final data is written to an SQLite database
 # called "data.sqlite" in the current working directory which has at least a table
 # called "data".
+
+def p2f(x):
+    striped = x.strip('%')
+    splited = striped.split(',')
+    integer = splited[0].replace('.','')
+    decimal = splited[1]
+
+    return float(integer+'.'+decimal)/100
+  
+
+from bs4 import BeautifulSoup
+#import scraperwiki
+
+url = 'https://www.fundamentus.com.br/resultado.php'
+html = scraperwiki.scrape(url)
+soup = BeautifulSoup(html, 'lxml')
+
+table = soup.find('table').tbody
+allRows = table.find_all('tr')
+
+for content in allRows:
+    ticker = content.span.text
+    roic_text = content.find_all("td")[14].text
+    roic = p2f(roic_text) 
+    scraperwiki.sqlite.save(unique_keys=['ticker'], data={"ticker": ticker, "roic": roic})
