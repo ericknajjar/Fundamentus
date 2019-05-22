@@ -26,13 +26,13 @@
 from bs4 import BeautifulSoup
 import scraperwiki
 
-def p2f(x):
+def strToNumber(x):
     striped = x.strip('%')
     splited = striped.split(',')
     integer = splited[0].replace('.','')
     decimal = splited[1]
 
-    return float(integer+'.'+decimal)/100
+    return float(integer+'.'+decimal)
   
 
 
@@ -47,6 +47,6 @@ for content in allRows:
     ticker = content.span.text
     roic_text = content.find_all("td")[14].text
     net_worth_text = content.find_all("td")[17].text
-    roic = p2f(roic_text) 
-    net_worth = p2f(net_worth_text)
+    roic = strToNumber(roic_text)/100 
+    net_worth = strToNumber(net_worth_text)
     scraperwiki.sqlite.save(unique_keys=['ticker'], data={"ticker": ticker, "roic": roic,"net_worth":net_worth})
