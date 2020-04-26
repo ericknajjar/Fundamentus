@@ -45,8 +45,8 @@ allRows = table.find_all('tr')
 
 for content in allRows:
     ticker = content.span.text
-    roic_text = content.find_all("td")[14].text
-    net_worth_text = content.find_all("td")[17].text
+    roic_text = content.find_all("td")[15].text
+    net_worth_text = content.find_all("td")[18].text
     roic = strToNumber(roic_text)/100 
     net_worth = strToNumber(net_worth_text)
     scraperwiki.sqlite.save(unique_keys=['ticker'], data={"ticker": ticker, "roic": roic,"net_worth":net_worth})
